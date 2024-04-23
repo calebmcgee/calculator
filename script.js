@@ -20,8 +20,18 @@ const operate = (num1, operator, num2) => {
     }
 }
 
-const calcInput = document.querySelectorAll('.calcInput');
-const screen = document.querySelectorAll('.screenShow');
-calcInput.addEventListener('click', (event) => {
-    console.log('hhh')
+const screen = document.querySelector('.screenContent');
+const calcInput = Array.from(document.querySelectorAll('.calcInput'));
+const clear = document.querySelector('.clear');
+console.log(calcInput[0].textContent);
+calcInput.map((button) => {
+    button.addEventListener('click', event => {
+        screen.textContent += button.textContent;
+    })
 });
+
+clear.addEventListener('click', (event) => {
+    screen.textContent = '';
+})
+
+
