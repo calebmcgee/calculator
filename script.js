@@ -20,4 +20,8 @@ const operate = (num1, operator, num2) => {
     }
 }
 
-
+const calcInput = document.querySelectorAll('.calcInput');
+const screen = document.querySelectorAll('.screenShow');
+calcInput.addEventListener('click', (event) => {
+    console.log('hhh')
+});
