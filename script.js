@@ -1,37 +1,57 @@
-const add = (...args)  => args.reduce((sum, num) => sum + num);
-const subtract = (...args)  => args.reduce((difference, num) => difference - num);
-const multiply = (...args)  => args.reduce((product, num) => product * num);
-const divide = (...args)  => args.reduce((quotient, num) => quotient / num);
-
-const operate = (num1, operator, num2) => {
-    switch (operator){
-        case '+' :  
-            console.log(add(num1,num2));
-            break;
-        case '-' :
-            console.log(subtract(num1,num2));
-            break;
-        case '*' :
-            console.log(multiply(num1,num2));
-            break;
-        case '/' :
-            console.log(divide(num1,num2));
-            break;
-    }
-}
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
 const screen = document.querySelector('.screenContent');
 const calcInput = Array.from(document.querySelectorAll('.calcInput'));
 const clear = document.querySelector('.clear');
+const equals = document.querySelector('.equals');
+
+const operate = (num1, operator, num2) => {
+    switch (operator){
+        case '+' :  
+            screen.textContent = add(num1,num2);
+            break;
+        case '-' :
+            screen.textContent = subtract(num1,num2);
+            break;
+        case '*' :
+            screen.textContent = multiply(num1,num2);
+            break;
+        case '/' :
+            if (num2 === 0){
+                screen.textContent = 'Undefined';
+            } else {
+                screen.textContent = divide(num1,num2);
+            }
+            break;
+    }
+}
+
 console.log(calcInput[0].textContent);
 calcInput.map((button) => {
     button.addEventListener('click', event => {
-        screen.textContent += button.textContent;
+        if (button.textContent === '+' || button.textContent === '-' || button.textContent === '*' || button.textContent === '/'){
+            screen.textContent += ' ' + button.textContent + ' ';
+
+        } else {
+            screen.textContent += button.textContent;
+        }
     })
 });
 
 clear.addEventListener('click', (event) => {
     screen.textContent = '';
-})
+});
+
+equals.addEventListener('click', (event)=>{
+        let num1 = parseInt(screen.textContent.split(' ')[0]);
+        let num2 = parseInt(screen.textContent.split(' ')[2]);
+        let operator = screen.textContent.split(' ')[1];
+        operate(num1,operator, num2);
+});
+
+
 
 
